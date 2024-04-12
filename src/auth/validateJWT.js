@@ -7,8 +7,6 @@ module.exports = async (req, res, next) => {
   try {
     const bearerToken = req.header('Authorization');
 
-    // console.log({ bearerToken });
-
     if (!bearerToken) {
       return res.status(401).json({ message: 'Token not found' });
     }
