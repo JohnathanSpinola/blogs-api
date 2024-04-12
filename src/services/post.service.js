@@ -1,16 +1,15 @@
 const { CustomException } = require('../exceptions/CustomExceptions');
-const { BlogPost, PostCategory } = require('../models');
+const { BlogPost } = require('../models');
+const { verifyCategories } = require('./categories.service');
 
-const insertPostService = async ({ title, content, categoriesIds, id }) => { 
+const insertPostService = async ({ title, content, categoryIds, id }) => { 
+  const verifyIds = await verifyCategories(categoryIds);
+  if (verifyIds.length !== categoryIds.length) {
+    throw new CustomException('badRequest', 'one or more "categoryIds" not found');
+  }
   const post = await BlogPost.create({ title, content, userId: id });
-  const newCategoryId = categoriesIds.map((categoryId) => ({
-    categoryId,
-    postId: post.id,
-  }));
-  await PostCategory.bulkCreate(newCategoryId);
-  if (!post) throw new CustomException('badRequest', 'Invalid fields');
 
-  console.log(post);
+  if (!post) throw new CustomException('badRequest', 'Bad Resquest');
 
   return post;
 };

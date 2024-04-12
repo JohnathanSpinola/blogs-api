@@ -1,5 +1,5 @@
 const { CustomException } = require('../exceptions/CustomExceptions');
-const { schema } = require('../schemas/schemas');
+const { schema, schemaPost } = require('../schemas/schemas');
 const { LoginService, UserService } = require('../services');
 const { loginValid } = require('../utils/validations');
 
@@ -34,4 +34,19 @@ const validationUser = async (req, _res, next) => {
   }
 };
 
-module.exports = { validationLogin, validationUser };
+const validationPost = async (req, _res, next) => {
+  try {
+    const { title, content, categoryIds } = req.body;
+    const { error } = schemaPost.validate({ title, content, categoryIds });
+    if (error) throw new CustomException('badRequest', error.message);
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = {
+  validationLogin,
+  validationUser,
+  validationPost,
+};

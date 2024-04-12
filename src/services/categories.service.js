@@ -15,7 +15,13 @@ const getCategoriesService = async () => {
   return newDataValues;
 };
 
+const verifyCategories = async (categoryIds) => {
+  const categories = await Category.findAll({ where: { id: categoryIds } });
+  return categories;
+};
+
 module.exports = {
   insertCategoriesService,
   getCategoriesService,
+  verifyCategories,
 };

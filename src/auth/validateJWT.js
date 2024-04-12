@@ -18,8 +18,6 @@ module.exports = async (req, res, next) => {
 
     req.user = decoded;
 
-    console.log({ decoded });
-
     next();
   } catch (error) {
     return res.status(401).json({ message: 'Expired or invalid token' });

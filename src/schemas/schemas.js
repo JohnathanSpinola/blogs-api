@@ -18,4 +18,19 @@ const schema = Joi.object({
     }),
 });
 
-module.exports = { schema };
+const schemaPost = Joi.object({
+  title: Joi.string().required()
+    .messages({
+      'any.required': 'Some required fields are missing',
+    }),
+  content: Joi.string().required()
+    .messages({
+      'any.required': 'Some required fields are missing',
+    }),
+  categoryIds: Joi.array().required()
+    .messages({
+      'any.required': 'Some required fields are missing',
+    }),
+});
+
+module.exports = { schema, schemaPost };
