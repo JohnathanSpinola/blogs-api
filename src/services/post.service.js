@@ -8,7 +8,7 @@ const insertPostService = async ({ title, content, categoryIds, id }) => {
   
   const verify = categoriesIds.every(({ dataValues }) => {
     console.log('id', { id: dataValues.id });
-    const test = categoriesIds.include(dataValues.id);
+    const test = categoryIds.include(dataValues.id);
     console.log('test', { test });
     return 'oi';
   });
