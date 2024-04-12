@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER, primaryKey: true },
     title: DataTypes.STRING,
     content: DataTypes.STRING,
-    userId: { type: DataTypes.INTEGER, primaryKey: true },
+    userId: DataTypes.INTEGER,
     published: DataTypes.DATE,
     updated: DataTypes.DATE,
   },
@@ -16,8 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   );
   
   BlogPost.associate = ({ User }) => {
-    BlogPost.hasOne(User, {
-       foreignKey: 'id', as: 'users',
+    BlogPost.belongsTo(User, {
+       foreignKey: 'id', as: 'user',
     })
   }
 
