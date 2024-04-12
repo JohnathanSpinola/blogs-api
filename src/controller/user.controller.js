@@ -6,7 +6,6 @@ const secret = process.env.JWT_SECRET || 'secretJWT';
 const insertUserController = async (req, res, next) => {
   try {
     const result = await UserService.insertUserService(req.body);
-    console.log('resultController', { result });
     const jwtConfig = {
       expiresIn: '7d',
       algorithm: 'HS256',

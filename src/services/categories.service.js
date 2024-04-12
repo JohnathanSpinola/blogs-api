@@ -2,10 +2,8 @@ const { CustomException } = require('../exceptions/CustomExceptions');
 const { Category } = require('../models');
 
 const insertCategoriesService = async (name) => { 
-  console.log('name', { name });
   if (!name) throw new CustomException('badRequest', '"name" is required');
   const { dataValues } = await Category.create({ name });
-  console.log('category', { dataValues });
 
   return dataValues;
 };

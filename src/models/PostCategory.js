@@ -5,10 +5,18 @@ module.exports = (sequelize, DataTypes) => {
     postId: {
       primaryKey: true,
       type: DataTypes.INTEGER,
+      references: {
+        model: 'blog_posts',
+        key: 'id',
+      },
     },
     categoryId: {
       primaryKey: true,
       type: DataTypes.INTEGER,
+      references: {
+        model: 'categories',
+        key: 'id',
+      },
     },
   },
   {
