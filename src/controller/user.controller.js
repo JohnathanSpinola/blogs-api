@@ -5,13 +5,13 @@ const secret = process.env.JWT_SECRET || 'secretJWT';
 
 const insertUserController = async (req, res, next) => {
   try {
-    const result = await UserService.insertUserService(req.body);
+    const user = await UserService.insertUserService(req.body);
     const jwtConfig = {
       expiresIn: '7d',
       algorithm: 'HS256',
     };
 
-    const token = jwt.sign({ data: result }, secret, jwtConfig);
+    const token = jwt.sign({ data: user }, secret, jwtConfig);
 
     res.status(201).json({ token });
   } catch (error) {

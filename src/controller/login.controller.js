@@ -11,11 +11,7 @@ const loginController = async (req, res, next) => {
       expiresIn: '7d',
       algorithm: 'HS256',
     };
-    const token = jwt.sign({
-      data: {
-        email: user.email, password: user.password,
-      },
-    }, secret, jwtConfig);
+    const token = jwt.sign({ data: user }, secret, jwtConfig);
 
     res.status(200).json({ token });
   } catch (error) {
