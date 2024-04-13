@@ -7,5 +7,6 @@ const postRouter = Router();
 
 postRouter.post('/', validationPost, validateJWT, PostController.insertCategoryController);
 postRouter.get('/', validateJWT, PostController.getPostController);
+postRouter.get('/:id', validateJWT, PostController.getPostByIdController);
 
 module.exports = postRouter;

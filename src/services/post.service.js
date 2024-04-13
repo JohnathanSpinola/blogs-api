@@ -33,7 +33,28 @@ const getPostService = async () => {
   return post;
 };
 
+const getPostByIdService = async (id) => {
+  const post = await BlogPost.findOne({
+    where: { id },
+    include: [{
+      model: User,
+      as: 'user',
+      attributes: { exclude: ['password'] },
+    },
+    {
+      model: Category,
+      as: 'categories',
+      through: { attributes: [] },
+    }],
+  });
+
+  if (!post) throw new CustomException('notFound', 'Post does not exist');
+  
+  return post;
+};
+
 module.exports = {
   insertPostService,
   getPostService,
+  getPostByIdService,
 };
