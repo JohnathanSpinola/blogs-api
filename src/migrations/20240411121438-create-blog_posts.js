@@ -28,8 +28,14 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      published: Sequelize.DATE,
-      updated: Sequelize.DATE,
+      published: {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
+      },
+      updated:  {
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
+      },
     })
   },
 
