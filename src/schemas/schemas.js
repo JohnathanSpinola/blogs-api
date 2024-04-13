@@ -1,5 +1,7 @@
 const Joi = require('joi');
 
+const someRequired = 'Some required fields are missing';
+
 const schema = Joi.object({
   displayName: Joi.string().min(8).required()
     .messages({
@@ -21,17 +23,29 @@ const schema = Joi.object({
 const schemaPost = Joi.object({
   title: Joi.string().required()
     .messages({
-      'any.required': 'Some required fields are missing',
-      'string.empty': 'Some required fields are missing',
+      'any.required': someRequired,
+      'string.empty': someRequired,
     }),
   content: Joi.string().required()
     .messages({
-      'any.required': 'Some required fields are missing',
+      'any.required': someRequired,
     }),
   categoryIds: Joi.array().required()
     .messages({
-      'any.required': 'Some required fields are missing',
+      'any.required': someRequired,
     }),
 });
 
-module.exports = { schema, schemaPost };
+const schemaUpdatePost = Joi.object({
+  title: Joi.string().required()
+    .messages({
+      'any.required': someRequired,
+      'string.empty': someRequired,
+    }),
+  content: Joi.string().required()
+    .messages({
+      'any.required': someRequired,
+    }),
+});
+
+module.exports = { schema, schemaPost, schemaUpdatePost };

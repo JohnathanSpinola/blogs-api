@@ -31,8 +31,23 @@ const getPostByIdController = async (req, res, next) => {
   }
 };
 
+const updatePostController = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { title, content } = req.body;
+    // const { id: idUser } = req.user.data;
+
+    await PostService.updatePostService(title, content, id);
+    const post = await PostService.getPostByIdService(id);
+    res.status(200).json(post);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   insertCategoryController,
   getPostController,
   getPostByIdController,
+  updatePostController,
 };
