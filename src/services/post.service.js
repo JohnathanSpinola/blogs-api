@@ -1,5 +1,5 @@
 const { CustomException } = require('../exceptions/CustomExceptions');
-const { BlogPost } = require('../models');
+const { BlogPost, User, Category } = require('../models');
 const { verifyCategoryIds } = require('../utils/validations');
 const { getCategoriesId } = require('./categories.service');
 
@@ -14,4 +14,26 @@ const insertPostService = async (title, content, categoryIds, id) => {
   return post;
 };
 
-module.exports = { insertPostService };
+const getPostService = async () => {
+  const post = await BlogPost.findAll({
+    include: [{
+      model: User,
+      as: 'user',
+      attributes: { exclude: ['password'] },
+    },
+    {
+      model: Category,
+      as: 'categories',
+      through: { attributes: [] },
+    }],
+  });
+
+  if (!post) throw new CustomException('badRequest', 'Bad Request');
+  
+  return post;
+};
+
+module.exports = {
+  insertPostService,
+  getPostService,
+};

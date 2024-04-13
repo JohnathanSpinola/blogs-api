@@ -6,5 +6,6 @@ const { validationPost } = require('../middlewares/validation.middleware');
 const postRouter = Router();
 
 postRouter.post('/', validationPost, validateJWT, PostController.insertCategoryController);
+postRouter.get('/', validateJWT, PostController.getPostController);
 
 module.exports = postRouter;

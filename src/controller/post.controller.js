@@ -12,4 +12,16 @@ const insertCategoryController = async (req, res, next) => {
   }
 };
 
-module.exports = { insertCategoryController };
+const getPostController = async (_req, res, next) => {
+  try {
+    const post = await PostService.getPostService();
+    res.status(200).json(post);
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = {
+  insertCategoryController,
+  getPostController,
+};
