@@ -1,4 +1,6 @@
+require('express-async-errors');
 const express = require('express');
+
 const errorMiddleware = require('./middlewares/error.middleware');
 const loginRouter = require('./routes/login.routes');
 const userRouter = require('./routes/user.routes');

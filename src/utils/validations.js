@@ -1,4 +1,4 @@
-const loginValid = (username, password) => username && password;
+const validatePassword = (user, password) => user.password !== password;
 
 const extractToken = (bearerToken) => bearerToken.split(' ')[1];
 
@@ -9,4 +9,4 @@ const verifyCategoryIds = (categoriesIds, categoryIds) => {
   return verify;
 };
 
-module.exports = { loginValid, extractToken, verifyCategoryIds };
+module.exports = { validatePassword, extractToken, verifyCategoryIds };
