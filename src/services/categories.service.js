@@ -3,20 +3,18 @@ const { Category } = require('../models');
 
 const insertCategoriesService = async (name) => { 
   if (!name) throw new BadRequestError('"name" is required');
-  const { dataValues } = await Category.create({ name });
+  const category = await Category.create({ name });
 
-  return dataValues;
+  return category;
 };
 
 const getCategoriesService = async () => {
-  const category = await Category.findAll();
-  if (!category) throw new BadRequestError('Invalid fields');
-  const newDataValues = category.map(({ dataValues }) => dataValues);
-  return newDataValues;
+  const categories = await Category.findAll();
+  return categories;
 };
 
-const getCategoriesId = async (categoryIds) => {
-  const categories = await Category.findAll({ where: { id: categoryIds } });
+const getCategoriesId = async (id) => {
+  const categories = await Category.findAll({ where: { id } });
   return categories;
 };
 

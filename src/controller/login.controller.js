@@ -1,11 +1,11 @@
 const jwt = require('jsonwebtoken');
-const { LoginService } = require('../services');
+const { UserService } = require('../services');
 
 const secret = process.env.JWT_SECRET || 'secretJWT';
 
 const createToken = async (req, res) => {
   const { email } = req.body;
-  const user = await LoginService.getUser(email);
+  const user = await UserService.getUser(email);
   const jwtConfig = {
     expiresIn: '7d',
     algorithm: 'HS256',

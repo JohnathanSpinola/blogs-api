@@ -9,9 +9,7 @@ const insertPostService = async (title, content, categoryIds, id) => {
   const verify = verifyCategoryIds(categoriesIds, categoryIds);
 
   if (verify) throw new BadRequestError('one or more "categoryIds" not found');
-
   const post = await BlogPost.create({ title, content, userId: id });
-  
   return post;
 };
 
@@ -24,6 +22,7 @@ const getAllPostService = async () => {
   });
 
   if (!post) throw new BadRequestError('Invalid fields');
+
   return post;
 };
 

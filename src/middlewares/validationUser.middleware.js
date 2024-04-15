@@ -1,7 +1,7 @@
 const { BadRequestError } = require('../errors/BadRequest.error');
 const { ConflictError } = require('../errors/Conflict.error');
 const { schemaUser, schemaLogin } = require('../schemas/schemasUser');
-const { UserService, LoginService } = require('../services');
+const { UserService } = require('../services');
 const { validatePassword } = require('../utils/validations');
 
 const validationLogin = async (req, _res, next) => {
@@ -10,7 +10,7 @@ const validationLogin = async (req, _res, next) => {
   
   if (error) throw new BadRequestError(error.message);
   
-  const user = await LoginService.getUser(email);
+  const user = await UserService.getUser(email);
   const passwordInvalid = validatePassword(user, password);
 
   if (passwordInvalid) throw new BadRequestError('Invalid fields');

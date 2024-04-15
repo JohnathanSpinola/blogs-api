@@ -14,18 +14,26 @@ const validationUpdatePost = async (req, _res, next) => {
   const { title, content } = req.body;
   const { id } = req.params;
   const { id: idUser } = req.user.data;
-  const { userId } = await PostService.getPostByIdService(id);
+
   const { error } = schemaUpdatePost.validate({ title, content });
-  if (userId !== idUser) throw new UnauthorizedError('Unauthorized user');
+  
   if (error) throw new BadRequestError(error.message);
+
+  const { userId } = await PostService.getPostByIdService(id);
+  
+  if (userId !== idUser) throw new UnauthorizedError('Unauthorized user');
+  
   next();
 };
 
 const validationDeletePost = async (req, _res, next) => {
   const { id } = req.params;
   const { id: idUser } = req.user.data;
+  
   const { userId } = await PostService.getPostByIdService(id);
+
   if (userId !== idUser) throw new UnauthorizedError('Unauthorized user');
+
   next();
 };
 
