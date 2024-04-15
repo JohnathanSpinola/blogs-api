@@ -7,6 +7,7 @@ const schemaLogin = Joi.object({
     .messages({
       'any.required': someRequired,
       'string.email': '"email" must be a valid email',
+      'string.empty': 'Some required fields are missing',
     }),
   password: Joi.string().min(6).required()
     .messages({

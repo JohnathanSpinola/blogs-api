@@ -1,8 +1,8 @@
-const { CustomException } = require('../exceptions/CustomExceptions');
+const { BadRequestError } = require('../errors/BadRequest.error');
 const { Category } = require('../models');
 
 const insertCategoriesService = async (name) => { 
-  if (!name) throw new CustomException('badRequest', '"name" is required');
+  if (!name) throw new BadRequestError('"name" is required');
   const { dataValues } = await Category.create({ name });
 
   return dataValues;
@@ -10,7 +10,7 @@ const insertCategoriesService = async (name) => {
 
 const getCategoriesService = async () => {
   const category = await Category.findAll();
-  if (!category) throw new CustomException('badRequest', 'Bad Request');
+  if (!category) throw new BadRequestError('Invalid fields');
   const newDataValues = category.map(({ dataValues }) => dataValues);
   return newDataValues;
 };

@@ -10,8 +10,4 @@ const insertPostCategoriesService = async (categoryIds, postId) => {
   return insertPostCategories;
 };
 
-// validação do token
-// verificar se o que existe o query
-// a busca vai ser feita pelo o title
-
 module.exports = { insertPostCategoriesService };

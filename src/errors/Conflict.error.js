@@ -2,7 +2,7 @@ const { CustomException } = require('../exceptions/CustomExceptions');
 
 class ConflictError extends CustomException {
   constructor(message) {
-    super(message, 409);
+    super(409, message);
   }
 }
 
