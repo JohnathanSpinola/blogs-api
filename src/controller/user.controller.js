@@ -26,8 +26,15 @@ const getUserByIdController = async (req, res) => {
   res.status(200).json(result);
 };
 
+const deleteUserController = async (req, res) => {
+  const { id } = req.user.data;
+  await UserService.getUserById(id);
+  res.status(204).json();
+};
+
 module.exports = {
   insertUserController,
   getAllUserController,
   getUserByIdController,
+  deleteUserController,
 };
