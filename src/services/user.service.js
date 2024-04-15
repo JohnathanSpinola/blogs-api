@@ -1,3 +1,4 @@
+const { NotFoundError } = require('../errors/NotFound.error');
 const { CustomException } = require('../exceptions/CustomExceptions');
 const { User } = require('../models');
 
@@ -23,7 +24,7 @@ const getAllUser = async () => {
 
 const getUserById = async (id) => {
   const result = await User.findOne({ where: { id }, attributes: { exclude: ['password'] } });
-  if (!result) throw new CustomException('notFound', 'User does not exist');
+  if (!result) throw new NotFoundError('User does not exist');
   return result.dataValues;
 };
 

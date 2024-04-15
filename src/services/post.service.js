@@ -14,7 +14,7 @@ const insertPostService = async (title, content, categoryIds, id) => {
   return post;
 };
 
-const getPostService = async () => {
+const getAllPostService = async () => {
   const post = await BlogPost.findAll({
     include: [
       { model: User, as: 'user', attributes: { exclude: ['password'] } },
@@ -52,7 +52,7 @@ const deletePostService = async (id) => {
 
 module.exports = {
   insertPostService,
-  getPostService,
+  getAllPostService,
   getPostByIdService,
   updatePostService,
   deletePostService,

@@ -8,6 +8,7 @@ const validationPost = async (req, _res, next) => {
   if (error) throw new CustomException('badRequest', error.message);
   next();
 };
+
 const validationUpdatePost = async (req, _res, next) => {
   const { title, content } = req.body;
   const { id } = req.params;

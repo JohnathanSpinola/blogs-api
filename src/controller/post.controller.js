@@ -8,9 +8,12 @@ const insertCategoryController = async (req, res) => {
   res.status(201).json(post);
 };
 
-const getPostController = async (_req, res) => {
-  const post = await PostService.getPostService();
-  res.status(200).json(post);
+const getAllPostController = async (req, res) => {
+  const { q = '' } = req.query;
+  const allPost = await PostService.getAllPostService();
+  const postSearch = allPost.filter(({ title, content }) => title.includes(q)
+    || content.includes(q));
+  res.status(200).json(postSearch);
 };
 
 const getPostByIdController = async (req, res) => {
@@ -35,7 +38,7 @@ const deletePostController = async (req, res) => {
 
 module.exports = {
   insertCategoryController,
-  getPostController,
+  getAllPostController,
   getPostByIdController,
   updatePostController,
   deletePostController,

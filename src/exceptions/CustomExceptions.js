@@ -1,9 +1,7 @@
-const { httpStatus } = require('../utils/httpStatus');
-
 class CustomException extends Error {
-  constructor(name, message) {
+  constructor(status, message) {
     super(message);
-    this.status = httpStatus[name];
+    this.status = status;
     this.message = message;
   }
 }
